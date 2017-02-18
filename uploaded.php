@@ -1,0 +1,125 @@
+<?php
+namespace SillyUtility;
+require 'sources/autoload.php';
+require 'vendor/autoload.php';
+require 'sources/config.php';
+
+if (empty($_POST['uuid'])) {
+  $error = ErrorPage::userErrorWithTitleAndMessage('Bill upload', 'Missing uuid, please go back and try again');
+  $error->renderAndDie();
+}
+if (!preg_match('/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i',$_POST['uuid'])) {
+  $error = ErrorPage::userErrorWithTitleAndMessage('Bill upload', 'Bad uuid');
+  $error->renderAndDie();
+}
+$uuid = $_POST['uuid'];
+if (empty($_POST['zip'])) {
+  $error = ErrorPage::userErrorWithTitleAndMessage('Bill upload', 'ZIP code is missing, please go back and try again');
+  $error->renderAndDie();  
+}
+if (empty($_POST['zip']) || intval($_POST['zip']) > 99999) {
+  $error = ErrorPage::userErrorWithTitleAndMessage('Bill upload', 'Only use five-digit zip code for privacy reasons, please go back and try again');
+  $error->renderAndDie();  
+}
+
+$bill = new Bill();
+$bill->uuid = $_POST['uuid'];
+$bill->zipCode = $_POST['zip'];
+if (!empty($_POST['company'])) {
+  $bill->company = $_POST['company'];
+}
+if (!empty($_POST['date'])) {
+  $bill->billingDate = $_POST['date'];
+}
+
+if (!empty($_POST['email'])) {
+  $subscriber = new Subscriber();
+  $subscriber->email = $_POST['email'];
+  $subscriber->zipCode = $bill->zipCode;
+  $subscriber->store();
+  $storedSubscriber = Subscriber::fetchWithUUID($subscriber->uuid);
+  $bill->subscriber = $storedSubscriber->id;
+}
+
+$bill->store();
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="William Entriken">
+    <title>Silly Utility</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+
+</head>
+
+<body>
+    <div class="primary-color-band">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand page-scroll" href="/">Silly Utility</a>
+                </div>
+            </div>
+        </nav>
+        
+        <section class="selling-point text-xs-center">
+            <div class="section-heading">
+                <h1 class="display-3">
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                  Thanks so much!
+                </h1>
+                <p class="lead">
+                  We will review your bill and publish it on the page you are about to see.
+                </p>
+                <hr class="section">                
+<?php if (!empty($subscriber)): ?>
+                <h1 class="display-4">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                  We will mail you if neighbors share bills near <?= $bill->zipCode ?>.
+                </h1>
+<?php else: ?>
+                <h1 class="display-4">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                  We will not mail you.
+                </h1>
+<?php endif; ?>
+                <hr class="section">
+                <h1 class="display-4">
+                  See your neighbors' bills.
+                </h1>
+                <p>
+                  <a href="19006" class="btn btn-lg btn-primary">Bills shared in 19006</a>
+                </p>
+            </div>
+        </section>
+
+    <footer class="text-xs-center">
+            <p>Made by <a href="http://phor.net/">William Entriken</a> because I think utilities are a racket.</p>
+            <p>Please mail volunteers<span>@</span>sillyutility.net to assist with this project.</p>
+            <p>Privacy policy: we publish what you give us, that's the point.</p>
+    </footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52764-24', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+</html>

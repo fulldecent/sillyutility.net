@@ -1,0 +1,15 @@
+/* Header */
+header {
+  position:relative;
+  width:100%;
+  min-height:auto;
+  overflow-y:hidden;
+  background:urlbg-pattern.png),#8e44ad;
+  background:url(bg-pattern.png),-webkit-linear-gradient(to left,#8e44ad,#e74c3c);
+  background:url(bg-pattern.png),linear-gradient(to left,#8e44ad,#e74c3c);
+  color:#fff
+}
+
+header a {
+  color:white
+}
