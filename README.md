@@ -1,6 +1,8 @@
 # Silly Utility
 Compare Utility Bills With Neighbors.
 
+![screen shot 2017-02-18 at 11 23 12 am](https://cloud.githubusercontent.com/assets/382183/23094751/a7eec0f8-f5cc-11e6-947a-a128e14dadad.png)
+
 ## Background
 
 Renegotiate your utility bills by learning what your neighbors pay.
