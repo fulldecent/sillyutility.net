@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
 
 if (empty($_POST['uuid'])) {
@@ -15,6 +14,10 @@ if (!preg_match('/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$
 $uuid = $_POST['uuid'];
 if (empty($_POST['zip'])) {
   $error = ErrorPage::userErrorWithTitleAndMessage('Bill upload', 'ZIP code is missing, please go back and try again');
+  $error->renderAndDie();  
+}
+if (!preg_match('/^[0-9]+$/i',$_POST['zip'])) {
+  $error = ErrorPage::userErrorWithTitleAndMessage('Bill upload', 'ZIP code is not a valid number, please go back and try again');
   $error->renderAndDie();  
 }
 if (empty($_POST['zip']) || intval($_POST['zip']) > 99999) {
@@ -83,6 +86,7 @@ $bill->store();
                 <p class="lead">
                   We will review your bill and publish it on the page you are about to see.
                 </p>
+                <a href="upload" class="text-xs-center btn btn-lg btn btn-primary m-x-auto">Upload another utility bill</a>
                 <hr class="section">                
 <?php if (!empty($subscriber)): ?>
                 <h1 class="display-4">
@@ -100,7 +104,7 @@ $bill->store();
                   See your neighbors' bills.
                 </h1>
                 <p>
-                  <a href="19006" class="btn btn-lg btn-primary">Bills shared in 19006</a>
+                  <a href="<?= $bill->zipCode ?>" class="btn btn-lg btn-primary">Bills shared in <?= $bill->zipCode ?></a>
                 </p>
             </div>
         </section>

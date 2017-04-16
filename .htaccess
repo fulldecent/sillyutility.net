@@ -3,41 +3,35 @@ RewriteEngine On
 # https://www.drupal.org/node/2645198
 RewriteRule "^.well-known/acme-challenge" - [L]
 
-# /zipcode.php?zipcode=12345 ==> /12345
-RewriteCond %{QUERY_STRING} zipcode=(\d+)
-RewriteRule ^zipcode.php %1? [L,R]
-
-
 # http://stackoverflow.com/a/4399158/300224
 RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-
-RewriteEngine On
-RewriteRule ^upload$ upload.php [NC,L]
-RewriteRule ^upload-image$ upload-image.php [NC,L]
-RewriteRule ^uploading$ uploading.php [NC,L]
-RewriteRule ^uploaded$ uploaded.php [NC,L]
-RewriteRule ^([0-9]{5})$ zipcode.php?zipcode=$1 [NC,L]
-RewriteRule ^upload$ upload.html [NC,L]
-RewriteRule ^volunteers$ volunteers.php [NC,L]
-RewriteRule ^volunteers-review-bill$ volunteers-review-bill.php [NC,L]
-RewriteRule ^volunteers-review-image$ volunteers-review-image.php [NC,L]
-RewriteRule ^volunteers-upload-image$ volunteers-upload-image.php [NC,L]
-RewriteRule ^admin-review-bill$ admin-review-bill.php [NC,L]
-RewriteRule ^blog$ blog.html [NC,L]
 
 RewriteEngine On
 RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+################################################################################
 
-# Protect log.txt
+# /zipcode.php?zipcode=12345 ==> /12345
+RewriteCond %{QUERY_STRING} zipcode=(\d+)
+RewriteRule ^zipcode.php %1? [L,R]
+
+#DefaultType application/x-httpd-php
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule !.*\.html$ %{REQUEST_FILENAME}.html [QSA,L]
+
+RewriteRule ^([0-9]{5})$ zipcode.php?zipcode=$1 [NC,L]
+
+
+################################################################################
+
 AuthType Basic
 AuthUserFile /home/sillyutility/www/.htpasswd
 AuthName "Volunteer login"

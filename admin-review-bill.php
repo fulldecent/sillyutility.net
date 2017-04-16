@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
 
 if (empty($_GET['uuid'])) {

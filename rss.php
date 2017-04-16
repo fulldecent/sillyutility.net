@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
 
 header("Content-Type: application/rss+xml");
@@ -19,9 +18,8 @@ echo <<<HEADER
 
 HEADER;
 
-$results = $database->select('bills', 'status!="DELETED" AND status!="PUBLISHED"');
-foreach ($results as $row) {
-  $bill = Bill::initWithStdClass((object) $row);
+$billsToPublish = Bill::fetchAllNotPublished();
+foreach ($billsToPublish as $bill) {
   $uuidHTML = htmlspecialchars($bill->uuid);
   $dateHTML = date("D, d M Y H:i:s O", strtotime($bill->updated));
   

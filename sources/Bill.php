@@ -146,30 +146,59 @@ class Bill
   public static function fetchWithUUID($uuid)
   {
     global $database;
-    $rows = $database->select('bills', 'uuid=:uuid', array('uuid'=>$uuid));
-    return self::initWithStdClass((object) $rows[0]);
+    $statement = $database->prepare('SELECT * FROM bills WHERE uuid = ?');
+    $statement->execute([$uuid]);
+    return self::initWithStdClass($statement->fetch());
   }
 
+  public static function fetchAllNotPublished()
+  {
+    global $database;
+    $statement = $database->query('SELECT * FROM bills WHERE status!="DELETED" AND status!="PUBLISHED"');
+    $retval = [];
+    foreach ($statement as $row) {
+      $retval[] = self::initWithStdClass($row);
+    }
+    return $retval;
+  }
+  
+  public static function fetchAllInZipCode($zipcode)
+  {
+    global $database;
+    $statement = $database->prepare('SELECT * FROM bills WHERE status != "DELETED" AND zip_code = ?');
+    $statement->execute([$zipcode]);
+    $retval = [];
+    foreach ($statement as $row) {
+      $retval[] = self::initWithStdClass($row);
+    }
+    return $retval;
+  }
+  
   public function store()
   {
-//TODO: validate UUID with ([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})    
-    
     global $database;
     $row = array();
     $row['zip_code'] = $this->zipCode;
     $row['uuid'] = $this->uuid;
     $row['company'] = $this->company;
     if (!empty($this->billingDate)) {
-      $row['billing_date'] = $this->billingDate;    
+      $row['billing_date'] = $this->billingDate;
+    } else {
+      $row['billing_date'] = null;
     }
     $row['status'] = $this->status;
     if (intval($this->subscriber)) {
       $row['subscriber'] = $this->subscriber;    
+    } else {
+      $row['subscriber'] = null;
     }
     if (!empty($this->totalPrice)) {
       $row['total_price'] = $this->totalPrice;
+    } else {
+      $row['total_price'] = null;
     }
-    $database->replace('bills', $row, true);
+    $statement = $database->prepare('REPLACE INTO bills (zip_code, uuid, company, billing_date, status, subscriber, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $statement->execute([$row['zip_code'], $row['uuid'], $row['company'], $row['billing_date'], $row['status'], $row['subscriber'], $row['total_price']]);
   }
 
   /// NONE: Store with the Player class

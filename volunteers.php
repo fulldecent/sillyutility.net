@@ -1,9 +1,7 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
-
 ?>  
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +54,8 @@ require 'sources/config.php';
                 <th>Subscriber #
                 <th><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Invoice
 <?php
-$results = $database->select('bills', 'status!="DELETED" AND status!="PUBLISHED"');
-foreach ($results as $row) {
+$statement = $database->query('SELECT * FROM bills WHERE status!="DELETED" AND status!="PUBLISHED"');  
+foreach ($statement as $row) {
   $bill = Bill::initWithStdClass((object) $row);
   echo "<tr>";
   echo '<td><a href="volunteers-review-bill?uuid='.htmlspecialchars($bill->uuid).'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Review</a>';

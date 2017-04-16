@@ -50,17 +50,15 @@ class Subscriber
   public static function fetchWithUUID($uuid)
   {
     global $database;
-    $rows = $database->select('subscribers', 'uuid=:uuid', array('uuid'=>$uuid));
-    return self::initWithStdClass((object) $rows[0]);
+    $statement = $database->prepare('SELECT * FROM subscribers WHERE uuid=?');
+    $statement->execute([$uuid]);
+    return self::initWithStdClass((object) $statement->fetch());
   }
   
   public function store()
   {
     global $database;
-    $row = array();
-    $row['uuid'] = $this->uuid;
-    $row['email'] = $this->email;
-    $row['zip_code'] = $this->zipCode;
-    $database->insert('subscribers', $row, true);
+    $statement = $database->prepare('INSERT INTO subscribers (uuid, email, zip_code) VALUES (?, ?, ?)');
+    $statement->execute([$this->uuid, $this->email, $this->zipCode]);
   }  
 }

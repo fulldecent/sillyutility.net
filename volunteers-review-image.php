@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
 
 if (empty($_GET['uuid'])) {
@@ -89,6 +88,7 @@ if (file_exists("bill-images-EDITED/$uuid-page-$pageNumber.jpg")) {
               <li>Names
               <li>Account numbers
               <li>Barcodes
+              <li>The +4 on a ZIP+4
               <li>ONLY the last two digits of the street address
             </ul>
             <li>Resize the file so the longest edge is 1200 pixels

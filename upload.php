@@ -1,9 +1,7 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
-
 $uuid = gen_uuid();  
 ?>  
 
@@ -60,10 +58,11 @@ $uuid = gen_uuid();
                 <i class="fa fa-file" aria-hidden="true"></i>
                 Upload a utility bill.
             </h1>
+<!--
             <div style="padding: 1em; border: 10px dashed rgba(255, 255, 255, 0.50); border-radius: 2em; margin: 1em 0" class="hidden-xs-down">
                 <h2>Drag and drop each image here or use the button below.</h2>
             </div>
-            
+-->            
             <span class="btn btn-primary fileinput-button">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <i class="fa fa-camera" aria-hidden="true"></i>

@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
 
 if (empty($_GET['zipcode']) || intval($_GET['zipcode']) > 99999) {
@@ -55,16 +54,19 @@ $zipcode = intval($_GET['zipcode']);
                 <th>Price
                 <th><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Invoice
 <?php
-$results = $database->select('bills', 'zip_code=:zip_code AND status != "DELETED"', array('zip_code'=>$zipcode));
-foreach ($results as $row) {
-  $bill = Bill::initWithStdClass((object) $row);
+$bills = Bill::fetchAllInZipCode($zipcode);
+foreach ($bills as $bill) {
   echo "<tr>";
   if ($bill->status == 'PUBLISHED') {
     echo '<td>' . htmlspecialchars($bill->company);
   } else {
     echo '<td class="text-muted">UNDER REVIEW';
   }
-  echo '<td>' . date('Y-m-d', strtotime($bill->billingDate));
+  if (strtotime($bill->billingDate)) {
+    echo '<td>' . date('Y-m-d', strtotime($bill->billingDate));
+  } else {
+    echo '<td class="text-muted">UNDER REVIEW';
+  }
   if ($bill->status == 'PUBLISHED') {
     echo '<td>$' . round($bill->totalPrice, 2);
   } else {

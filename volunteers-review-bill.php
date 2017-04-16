@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 require 'sources/config.php';
 
 if (empty($_GET['uuid'])) {
@@ -128,7 +127,7 @@ if ($pages > 0 && $allEdited) {
             </div>
             <div class="col-md-3">
                 <h3 class=" text-center text-xs-center">
-                    Total price
+                    Total price ("Total New Charges")
                 </h3>
                 <div class="input-group">
                   <div class="input-group-addon">$</div>

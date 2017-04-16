@@ -1,7 +1,6 @@
 <?php
 namespace SillyUtility;
 require 'sources/autoload.php';
-require 'vendor/autoload.php';
 
 //https://allseeing-i.com/how-to-setup-your-php-site-to-use-utf8
 //setup php for working with Unicode data
@@ -12,14 +11,10 @@ mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
 
-$database = new \ThinPdo\Db('mysql:host=127.0.0.1;dbname=sillyuti_main', 'sillyuti_main', '2hu2u9h9*H#98h');
-function dbError($errorObject){
-	header('Content-type: application/json');
-	header('HTTP/1.0 500 Internal Server Error', true, 500);
-  echo json_encode(array("status"=>"error", "info"=>$errorObject));
-  die();
-}
-$database->setErrorCallbackFunction("\SillyUtility\dbError", "text");
+// https://phpdelusions.net/pdo
+$database = new \PDO('mysql:host=127.0.0.1;dbname=XXX', 'XXX', 'XXX');
+$database->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
+$database->setAttribute( \PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ );
 
 function fatalUserError($msg) {
   $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');  
