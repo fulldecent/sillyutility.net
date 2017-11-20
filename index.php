@@ -1,21 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="William Entriken">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Silly Utility</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="main.css"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
 
   <!-- Custom Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-
   <style>
 header {
   position:relative;
@@ -28,7 +25,7 @@ header {
   color:#fff;
   font-family:Catamaran,Helvetica,Arial,sans-serif;font-weight:200;letter-spacing:1px;
   padding: 3em 0;
-}    
+}
 
 footer {
   text-align: center;
@@ -64,7 +61,7 @@ ul.list-social li.social-google-plus a:hover{background-color:#d73925}
     <div class="container">
       <div class="row">
         <div class="col-lg-7 align-self-center justify-content-center">
-          <h1 class="display-3">Compare Utility Bills With Neighbors.</h1>          
+          <h1 class="display-3">Compare Utility Bills With Neighbors.</h1>
           <form action="zipcode.php" method="get" class="form-inline">
 <?php
 $ch = curl_init();
@@ -80,7 +77,7 @@ if ($geo->country_code == 'US' && !empty($geo->zip_code) && !strstr(strtolower($
 ?>
             <input class="form-control form-control-lg" type="text" pattern="\d*" name="zipcode" placeholder="ZIP Code" value="<?= $zip ?>" style="width:10em">
             <button class="btn btn-primary btn-outline btn-lg">Go</button>
-          </form>  
+          </form>
         </div>
         <div class="col-lg-5">
           <img src="compare.png" class="img-fluid" alt="Comcast">
@@ -135,7 +132,7 @@ if ($geo->country_code == 'US' && !empty($geo->zip_code) && !strstr(strtolower($
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="alert.png" class="img-fluid" alt="Review Comcast XFINITY bill"> 
+                    <img src="alert.png" class="img-fluid" alt="Review Comcast XFINITY bill">
                 </div>
                 <div class="col-md-8">
                         <div class="row">

@@ -5,27 +5,25 @@ require 'sources/config.php';
 
 if (empty($_GET['zipcode']) || intval($_GET['zipcode']) > 99999) {
   $error = ErrorPage::userErrorWithTitleAndMessage('Finding shared bills', 'Only use five-digit zip code for privacy reasons, please go back and try again.');
-  $error->renderAndDie();  
+  $error->renderAndDie();
 }
 $zipcode = intval($_GET['zipcode']);
-?>  
-<!DOCTYPE html>
+?>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="William Entriken">
-    <title>Silly Utility</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Silly Utility</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
 
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +35,7 @@ $zipcode = intval($_GET['zipcode']);
                 </div>
             </div>
         </nav>
-        
+
         <section class="selling-point text-xs-center">
             <h1 class="display-3">
                 <i class="fa fa-file" aria-hidden="true"></i>
@@ -85,9 +83,9 @@ foreach ($bills as $bill) {
   echo '<td>';
 
 }
-  
-  
-?>                    
+
+
+?>
             <tr>
                 <td>&nbsp;<td><td><td><td>
             <tr>
@@ -100,7 +98,7 @@ foreach ($bills as $bill) {
             <a href="upload" class="text-xs-center btn btn-lg btn btn-primary m-x-auto">Upload another utility bill</a>
         </section>
     </div>
-    
+
     <footer class="text-xs-center">
         <p>Made by <a href="http://phor.net/">William Entriken</a> because I think utilities are a racket.</p>
         <p>Please mail volunteers<span>@</span>sillyutility.net to assist with this project.</p>

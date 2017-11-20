@@ -22,30 +22,28 @@ $fileName = '';
 if (file_exists("bill-images-EDITED/$uuid-page-$pageNumber.jpg")) {
   $fileName = "bill-images-EDITED/$uuid-page-$pageNumber.jpg";
 } else if (file_exists("bill-images-NOT-REVIEWED/$uuid-page-$pageNumber.png")) {
-  $fileName = "bill-images-NOT-REVIEWED/$uuid-page-$pageNumber.png";  
+  $fileName = "bill-images-NOT-REVIEWED/$uuid-page-$pageNumber.png";
 } else {
   $error = ErrorPage::userErrorWithTitleAndMessage('Review image', 'Cannot find image');
-  $error->renderAndDie();  
+  $error->renderAndDie();
 }
 
-?>  
-<!DOCTYPE html>
+?>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="William Entriken">
-    <title>Silly Utility</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Silly Utility</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
 
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 </head>
 
 <body>
@@ -53,13 +51,13 @@ if (file_exists("bill-images-EDITED/$uuid-page-$pageNumber.jpg")) {
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="volunteers" class="navbar-brand page-scroll">Silly Utility &mdash; 
-                      Volunteers &mdash; 
+                    <a href="volunteers" class="navbar-brand page-scroll">Silly Utility &mdash;
+                      Volunteers &mdash;
                       <i class="fa fa-user" aria-hidden="true"></i> <?= htmlspecialchars($_SERVER['PHP_AUTH_USER']) ?></a>
                 </div>
             </div>
         </nav>
-        
+
         <section class="selling-point text-xs-center">
             <h1 class="display-3">
                 <i class="fa fa-file" aria-hidden="true"></i>
@@ -81,8 +79,8 @@ if (file_exists("bill-images-EDITED/$uuid-page-$pageNumber.jpg")) {
           <ol>
             <li>Download the image (right click, download)
             <li>Rotate if necessary
-            <li>Crop if necessary            
-            <li>Adjust color if necessary            
+            <li>Crop if necessary
+            <li>Adjust color if necessary
             <li>Redact sensitive information
             <ul>
               <li>Names
@@ -99,7 +97,7 @@ if (file_exists("bill-images-EDITED/$uuid-page-$pageNumber.jpg")) {
           <h2>Final image</h2>
             <form action="volunteers-upload-image" method="post" enctype="multipart/form-data">
               <input type="hidden" name="uuid" value="<?= $uuid ?>">
-              <input type="hidden" name="pageNumber" value="<?= $pageNumber ?>">             
+              <input type="hidden" name="pageNumber" value="<?= $pageNumber ?>">
               <input type="file" name="file" />
               <button class="btn btn-lg btn-primary">
                 <i class="fa fa-upload" aria-hidden="true"></i>
@@ -108,7 +106,7 @@ if (file_exists("bill-images-EDITED/$uuid-page-$pageNumber.jpg")) {
             </form>
         </div>
       </div>
-      
+
     </section>
 
 

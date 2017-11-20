@@ -19,20 +19,18 @@ if (!empty($_POST['action'])) {
 
 if ($bill->status == 'DELETED') {
   $error = ErrorPage::userErrorWithTitleAndMessage('Review bill', 'The bill is deleted and gone!');
-  $error->renderAndDie();  
+  $error->renderAndDie();
 }
-?>  
-<!DOCTYPE html>
+?>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="William Entriken">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Silly Utility</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
 
     <!-- Custom Fonts -->
@@ -46,13 +44,13 @@ if ($bill->status == 'DELETED') {
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="volunteers" class="navbar-brand page-scroll">Silly Utility &mdash; 
-                      Admin &mdash; 
+                    <a href="volunteers" class="navbar-brand page-scroll">Silly Utility &mdash;
+                      Admin &mdash;
                       <i class="fa fa-user" aria-hidden="true"></i> <?= htmlspecialchars($_SERVER['PHP_AUTH_USER']) ?></a>
                 </div>
             </div>
         </nav>
-        
+
         <section class="selling-point text-xs-center">
             <h1 class="display-3">
                 <i class="fa fa-file" aria-hidden="true"></i>
@@ -87,7 +85,7 @@ if (count($pages) == 0) {
 }
 
 if ($pages > 0 && $allEdited) {
-?>        
+?>
 
         <hr>
         <h2>When you click PUBLISH, you are responsible for emailing all subscribed people for nearby ZIP codes! This is not automated yet!</h2>
@@ -99,13 +97,13 @@ if ($pages > 0 && $allEdited) {
                     Service ZIP code
                 </h3>
                 <p><?= htmlspecialchars($bill->zipCode) ?></p>
-            </div>          
+            </div>
             <div class="col-md-3">
                 <h3 class=" text-center text-xs-center">
                     Company
                 </h3>
                 <p><?= htmlspecialchars($bill->company) ?></p>
-            </div>          
+            </div>
             <div class="col-md-3">
                 <h3 class=" text-center text-xs-center">
                     Billing date
@@ -118,11 +116,11 @@ if ($pages > 0 && $allEdited) {
                 </h3>
                 <p>$<?= htmlspecialchars($bill->totalPrice) ?></p>
                 </div>
-            </div>   
+            </div>
         </div>
         <p>
             <button name="action" value="publish" class="btn btn-lg btn-primary">Publish bill</button>
-        </p>       
+        </p>
         </form>
 <?php
 }

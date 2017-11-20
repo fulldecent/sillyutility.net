@@ -23,32 +23,29 @@ if (!empty($_POST['action'])) {
     $bill->status = 'READY PUBLISH';
     $bill->store();
     header('Location: volunteers');
-    die();    
+    die();
   }
 }
 
 if ($bill->status == 'DELETED') {
   $error = ErrorPage::userErrorWithTitleAndMessage('Review bill', 'The bill is deleted and gone!');
-  $error->renderAndDie();  
+  $error->renderAndDie();
 }
-?>  
-<!DOCTYPE html>
+?>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="William Entriken">
-    <title>Silly Utility</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Silly Utility</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 </head>
 
 <body>
@@ -56,13 +53,13 @@ if ($bill->status == 'DELETED') {
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="volunteers" class="navbar-brand page-scroll">Silly Utility &mdash; 
-                      Volunteers &mdash; 
+                    <a href="volunteers" class="navbar-brand page-scroll">Silly Utility &mdash;
+                      Volunteers &mdash;
                       <i class="fa fa-user" aria-hidden="true"></i> <?= htmlspecialchars($_SERVER['PHP_AUTH_USER']) ?></a>
                 </div>
             </div>
         </nav>
-        
+
         <section class="selling-point text-xs-center">
             <h1 class="display-3">
                 <i class="fa fa-file" aria-hidden="true"></i>
@@ -97,12 +94,12 @@ if (count($pages) == 0) {
 }
 
 if ($pages > 0 && $allEdited) {
-?>        
+?>
 
         <form method="post">
         <p>
             <button name="action" value="delete" class="btn btn-lg btn-danger">Delete bill</button>
-        </p>       
+        </p>
         </form>
         <hr>
         <form method="post">
@@ -112,13 +109,13 @@ if ($pages > 0 && $allEdited) {
                     Service ZIP code
                 </h3>
                 <input required class="form-control form-control-lg m-x-auto form-control-lg" type="text" pattern="\d*" name="zipCode" value="<?= htmlspecialchars($bill->zipCode) ?>">
-            </div>          
+            </div>
             <div class="col-md-3">
                 <h3 class=" text-center text-xs-center">
                     Company
                 </h3>
                 <input required class="form-control form-control-lg m-x-auto form-control-lg" type="text" name="company" value="<?= htmlspecialchars($bill->company) ?>">
-            </div>          
+            </div>
             <div class="col-md-3">
                 <h3 class=" text-center text-xs-center">
                     Billing date
@@ -133,12 +130,12 @@ if ($pages > 0 && $allEdited) {
                   <div class="input-group-addon">$</div>
                   <input required type="text" class="form-control form-control-lg" name="totalPrice" value="<?= htmlspecialchars($bill->totalPrice) ?>">
                 </div>
-            </div>   
+            </div>
         </div>
         <p>
             <a class="btn btn-lg btn-warning" href="?uuid=<?= $bill->uuid ?>">Discard changes</a>
             <button name="action" value="readyPublish" class="btn btn-lg btn-primary">Publish bill</button>
-        </p>       
+        </p>
         </form>
 <?php
 }
