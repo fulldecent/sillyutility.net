@@ -63,19 +63,7 @@ ul.list-social li.social-google-plus a:hover{background-color:#d73925}
         <div class="col-lg-7 align-self-center justify-content-center">
           <h1 class="display-3">Compare Utility Bills With Neighbors.</h1>
           <form action="zipcode.php" method="get" class="form-inline">
-<?php
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_URL, 'http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 500);
-$geo = json_decode(curl_exec($ch));
-curl_close($ch);
-//var_dump($geo);
-$zip = '';
-if ($geo->country_code == 'US' && !empty($geo->zip_code) && !strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
-  $zip = $geo->zip_code;
-?>
-            <input class="form-control form-control-lg" type="text" pattern="\d*" name="zipcode" placeholder="ZIP Code" value="<?= $zip ?>" style="width:10em">
+            <input class="form-control form-control-lg" type="text" pattern="\d*" name="zipcode" placeholder="ZIP Code" value="" style="width:10em">
             <button class="btn btn-primary btn-outline btn-lg">Go</button>
           </form>
         </div>
@@ -206,6 +194,11 @@ if ($geo->country_code == 'US' && !empty($geo->zip_code) && !strstr(strtolower($
       gtag('js', new Date());
       gtag('config', 'UA-52764-24');
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+      $.getJSON("http://freegeoip.net/json/",function(result){
+        $('input').val(result.zip_code)
+      });
+   </script>
 </body>
-
 </html>
