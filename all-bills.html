@@ -1,0 +1,88 @@
+---
+layout: none
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Silly Utility</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+
+  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <style>
+  header {
+    position:relative;
+    width:100%;
+    min-height:auto;
+    overflow-y:hidden;
+    background:url(/assets/images/bg-pattern.png),linear-gradient(to left,#8e44ad,#e74c3c);
+    color:#fff;
+    font-family:Catamaran,Helvetica,Arial,sans-serif;font-weight:200;letter-spacing:1px;
+    padding: 3em 0;
+  }
+
+  section{padding:5em 0}
+  section.feature{padding:150px 0;position:relative}
+
+  .bg-one{color:white;background:#f1c40f;background:-webkit-linear-gradient(#f1c40f,#e7842d);background:linear-gradient(#f1c40f,#e7842d)}
+  .bg-two{color:white;background:#3498db;background:-webkit-linear-gradient(#3498db,#2980b9);background:linear-gradient(#3498db,#2980b9)}
+
+  section.features .section-heading{margin-bottom:100px}
+  section.features .section-heading h2{margin-top:0}
+  section.features .section-heading p{margin-bottom:0}
+  section.features .device-container,section.features .feature-item{max-width:300px;margin:0 auto}
+  section.features .device-container{margin-bottom:100px}
+
+  section.cta{position:relative;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-o-background-size:cover;background-position:center;background-image:url(bg-cta.jpg);padding:250px 0}
+
+  ul.list-social li a{display:inline-block;height:80px;width:80px;line-height:80px;font-size:40px;border-radius:100%;color:#fff}
+  ul.list-social li.social-twitter a{background-color:#1da1f2}
+  ul.list-social li.social-twitter a:hover{background-color:#0d95e8}
+  ul.list-social li.social-facebook a{background-color:#3b5998}
+  ul.list-social li.social-facebook a:hover{background-color:#344e86}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1 class="display-3">All Bills</h1>
+    </div>
+  </header>
+
+  <section id="one" class="feature bg-one text-center">
+    <ul>
+{% assign image_files = site.static_files | where: "bill", true %}
+{% for myimage in image_files %}
+      <li><a href="{{ myimage.path }}">{{ myimage.path }}</a></li>
+{% endfor %}
+    </ul>
+  </section>
+
+  <footer>
+    <div class="container text-center py-4">
+      <p>Made by <a href="https://phor.net/">William Entriken</a> because most utilities suck.</p>
+      <p>Mail your <strong>redacted</strong> utility bill to: volunteers<span>@</span>sillyutility.net.</p>
+      <p>Privacy policy: we publish what you give us, that's the point.</p>
+    </div>
+  </footer>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52764-24"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-52764-24');
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

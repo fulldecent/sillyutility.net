@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Silly Utility</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="main.css">
 
@@ -19,9 +19,7 @@
     width:100%;
     min-height:auto;
     overflow-y:hidden;
-    background:url(../img/bg-pattern.png),#8e44ad;
-    background:url(../img/bg-pattern.png),-webkit-linear-gradient(to left,#8e44ad,#e74c3c);
-    background:url(bg-pattern.png),linear-gradient(to left,#8e44ad,#e74c3c);
+    background:url(/assets/images/bg-pattern.png),linear-gradient(to left,#8e44ad,#e74c3c);
     color:#fff;
     font-family:Catamaran,Helvetica,Arial,sans-serif;font-weight:200;letter-spacing:1px;
     padding: 3em 0;
@@ -55,17 +53,15 @@
       <div class="row">
         <div class="col-lg-7 align-self-center justify-content-center">
           <h1 class="display-3">Compare Utility Bills With Neighbors.</h1>
-          <form action="zipcode.php" method="get" class="form-inline">
+          <form action="all-bills.html" method="get" class="form-inline">
             <div class="input-group">
               <input type="text" pattern="\d*" class="form-control form-control-lg" name="zipcode" placeholder="ZIP Code">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="sumbit">Go!</button>
-              </span>
+              <button class="btn btn-lg btn-primary" type="sumbit">Go!</button>
             </div>
           </form>
         </div>
         <div class="col-lg-5">
-          <img src="compare.png" class="img-fluid" alt="Comcast">
+          <img src="/assets/images/compare.png" class="img-fluid" alt="Comcast" style="max-height:350px">
         </div>
       </div>
     </div>
@@ -82,26 +78,38 @@
   </section>
 
   <section id="two" class="feature bg-two text-center">
-    <h2 class="display-4">Companies charge whatever they want.</h2>
-    <p class="lead">They make you buy phone service and you don't even have a phone.</p>
+    <h2>Renegotiate your utility bills by learning what your neighbors pay.</h2>
+    <p>Everybody on your block probably pays different prices for their internet / TV and phone service. Also, the utility companies have a strong upper hand when talking with you:</p>
     <div class="badges">
       <i class="fa fa-money fa-5x" aria-hidden="true"></i><br>
       <i class="fa fa-magnet fa-5x" aria-hidden="true"></i>
     </div>
+    <ul>
+      <li>They know how much you pay, and everyone else pays</li>
+      <li>They write the legislation that prevents you from starting a competing company</li>
+      <li>They make agreements with other utilities to ensure only one or a few companies operate in your zip code</li>
+      <li>They advertise one price on TV and then charge a completely different price on the bill</li>
+    </ul>
+    <p>We are a civic project to fix this problem by empowering consumers to make better decisions.</p>
+    <div class="badges">
+      <i class="text-info fa fa-magic fa-5x" aria-hidden="true"></i><br>
+    </div>
+    <ul>
+      <li>See what your neighbors pay</li>
+      <li>Call your utility company to renegotiate your rate</li>
+      <li>Use the money you save to go on vacation</li>
+    </ul>
   </section>
 
   <section id="features" class="features text-center">
     <h2 class="display-4">Renegotiate your bill.</h2>
     <p class="lead text-muted">See what your neighbors pay, and call to ask for the same deal.</p>
-    <div class="badges">
-      <i class="text-info fa fa-magic fa-5x" aria-hidden="true"></i><br>
-    </div>
     <hr class="m-5">
 
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <img src="alert.png" class="img-fluid" alt="Review Comcast XFINITY bill">
+          <img src="/assets/images/alert.png" class="img-fluid" alt="Review Comcast XFINITY bill">
         </div>
         <div class="col-md-8">
           <div class="row">
@@ -133,17 +141,6 @@
     </div>
   </section>
 
-  <section class="cta" class="feature bg-two text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h2 style="color: white" class="display-3">Do it now.</h2>
-          <a style="color:white; border-color: white" class="btn btn-outline-primary btn-lg" href="upload" role="button">Compare bills</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="one" class="feature bg-one text-center" style="background:#fdcc52;background:-webkit-linear-gradient(#fdcc52,#fdc539);background:linear-gradient(#fdcc52,#fdc539)">
     <div class="container">
       <h2 class="display-4"><i style="color:red" class="fa fa-plane" aria-hidden="true"></i> Use the money to go on vacation or something.</h2>
@@ -162,9 +159,8 @@
 
   <footer>
     <div class="container text-center py-4">
-      <p>Made by <a href="http://phor.net/">William Entriken</a> because I think utilities are a racket.</p>
-      <p>Please mail volunteers<span>@</span>sillyutility.net to assist with this project. <a href="https://github.com/fulldecent/silly-utility">See our GitHub</a>.</p>
-      <p>Read <a href="blog">our blog</a>.</p>
+      <p>Made by <a href="https://phor.net/">William Entriken</a> because most utilities suck.</p>
+      <p>Mail your <strong>redacted</strong> utility bill to: volunteers<span>@</span>sillyutility.net.</p>
       <p>Privacy policy: we publish what you give us, that's the point.</p>
     </div>
   </footer>

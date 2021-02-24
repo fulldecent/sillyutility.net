@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>OCR Example</title>
+  </head>
+  <body> 
+    <p>See console</p>
+
+    <img id="bob" src="/bills/20100816-Comcast-02446-09b22e6-1.jpg" style="height:200px">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+  <script>
+    Tesseract.recognize($('#bob'))
+            .progress(function  (p) { console.log('progress', p)    })
+            .then(function (result) { console.log('result', result) })
+  </script>
+  <input type="file" onchange="Tesseract.recognize(this.files[0]).progress(function(data){console.log(data)}).then(function(data){console.log(data)})">
+  </body>
+</html>
